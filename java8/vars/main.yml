@@ -1,11 +1,12 @@
 jdk_dir: 8u161-b12
 jdk_archive: jdk-8u161-linux-x64.tar.gz
-jdk_local_dir: jdk8
+jdk_local_dir: jdk1.8.0_161
 download_folder: /opt/oracle
 bin_dir: /usr/bin
 profile_path: /etc/profile.d
 java_name: "{{ download_folder }}/{{ jdk_local_dir }}"
 java_archive: "{{ download_folder }}/{{ jdk_archive }}"
+jdk_exe: jdk-8u161-windows-x64.exe
 download_url: http://download.oracle.com/otn-pub/java/jdk/{{jdk_dir}}/{{jdk_archive}}
 java_version: 8
 java_subversion: 161
@@ -13,3 +14,6 @@ java_build_custom: 12
 jdk_version_detail_custom: "{{ java_version }}u{{ java_subversion }}-b{{ java_build_custom }}"
 jdk_tarball_hash: 2f38c3b165be4555a1fa6e98c45e0808
 jdk_tarball_url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail_custom }}/{{ jdk_tarball_hash }}/{{ jdk_archive }}"
+jdk_exe_url: "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail_custom }}/{{ jdk_tarball_hash }}/{{ jdk_exe }}"
+win_download_folder: "C:/Test"
+java_exe: "{{ win_download_folder }}/{{ jdk_exe }}"

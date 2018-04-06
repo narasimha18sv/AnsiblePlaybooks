@@ -1,0 +1,17 @@
+- name: Create Directory structure
+  win_file:
+    path: "{{ win_download_folder }}"
+    state: directory
+
+- name: Download JDK8
+  win_get_url:
+    url: "{{ jdk_exe_url }}"
+    dest: "{{ java_exe }}" 
+    headers:
+      Cookie: oraclelicense=accept-securebackup-cookie
+
+- name: Install JDK8 
+  win_package:
+    path: "{{ java_exe }}"
+    state: present
+    product_id: jdk8
