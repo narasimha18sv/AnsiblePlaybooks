@@ -1,0 +1,31 @@
+Ansible is a simple open source IT engine which automates application deployment, intra service orchestration, cloud provisioning and many other IT tools. Ansible uses YAML as its coding language which is easily readable for anyone.
+
+Ansible is an agent less configuration management tool which uses SSH/WINRM to connect to the servers which need to be configured. For linux servers it uses ssh protocol and for windows servers it uses WINRM service for establishing connection. 
+
+Let’s have a look at some of the terminology used in ansible:
+  Controller Machine: Machine where Ansible is installed
+  Inventory: Information regarding servers to be managed
+  Playbook: Automation is defined using tasks defined in YAML format
+  Task: Procedure to be executed
+  Module: Predefined commands executed directly on remote hosts
+  Play: Execution of a playbook
+  Role: a Predefined way for organizing playbooks
+  Handlers: Tasks with unique names that will only be executed if notified by another task
+An Ansible controller machine will always be a linux machine. 
+Ansible also comes with a UI tool called Ansible tower which helps in managing the hosts.
+
+##Installation: 
+
+#Ubuntu: 
+$ sudo apt-get update 
+$ sudo apt-get install software-properties-common 
+$ sudo apt-add-repository ppa:ansible/ansible $ sudo apt-get update 
+$ sudo apt-get install ansible
+
+#Centos: 
+sudo yum -y install epel-repo
+sudo yum install -y ansible
+
+#MAC:
+easy_install pip
+pip instal -U ansible
