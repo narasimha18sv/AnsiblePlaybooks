@@ -1,0 +1,33 @@
+Ansible supports several sources for configuring its behavior, including an ini file named ansible.cfg, environment variables, 
+command-line options, playbook keywords, and variables.
+
+Changes can be made and used in a configuration file which will be searched for in the following order:
+
+        ANSIBLE_CONFIG (environment variable if set)
+        ansible.cfg (in the current directory)
+        ~/.ansible.cfg (in the home directory)
+        /etc/ansible/ansible.cfg
+
+
+Version check:
+
+ansible --version
+
+This command also shows the output of ansible.cfg file location if set
+
+/etc/ansible/hosts -- default inventory file that would be taken by ansible
+
+add 127.0.0.1 to hosts file
+
+$ ansible -m ping all
+
+127.0.0.1 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+
+# to copy a file 
+$ ansible -m copy -a "src = /etc/yum.conf dest = /tmp/yum.conf"
+
+# Gather Facts
+$ ansible all -m setup 
