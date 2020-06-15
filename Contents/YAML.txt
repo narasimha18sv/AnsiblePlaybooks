@@ -1,0 +1,21 @@
+YAML uses simple key-value pair to represent the data. The dictionary is represented in key: value pair.
+
+Example 1:
+---
+Name: Narasimha
+Address: Hyderabad
+
+Example 2: Nested YAML
+---
+Narasimha:
+  place: Hyderabad
+  Address: KPHB
+
+Example 3: Multiple values 
+---
+Fruits:
+  - Apple
+  - Bananna
+Vegerables:
+  - tomato
+  - potato
