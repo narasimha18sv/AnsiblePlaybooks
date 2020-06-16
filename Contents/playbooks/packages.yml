@@ -25,3 +25,8 @@
     apt:
       name: ntpdate
       state: present
+  
+  - name: install packages using specific package manager pip
+    pip:
+      name: flask
+      state: present
