@@ -45,3 +45,15 @@ Now you willbe able to see the output but not in a proper format.
 
 Try incresing the verbosity by adding another v to the command like -vvvv. max 4v's can be added to find more output information.
 
+
+## To get the output to a variable we use a module called register. 
+
+check output.yml file for the code
+
+Here we will add register to the task which we want output to be stored in a variable called output. Now you can use this 
+variable if you want the output of that command to be taken for further operations. 
+
+to print this variable we use debug module. 
+
+debug is the ansible module which we use to get any messages in the playbook execution for our verification. 
+
