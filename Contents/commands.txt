@@ -1,0 +1,47 @@
+shell is the module to execute any linux commands from ansible
+
+please check linux_command.yml in playbooks folder. 
+
+In this playbook we are executing ls command to list all the files in a particult path. 
+
+# ansible-playbook linux_commands.yml 
+
+PLAY [execute linux commands] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host 127.0.0.1 should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible 
+release will default to using the discovered platform python for this host. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information. This feature 
+will be removed in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [127.0.0.1]
+
+TASK [print all the files of /root/] ***********************************************************************************************************************************************************************
+changed: [127.0.0.1]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+127.0.0.1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Even though execution is successful we are not able to see the output of the linux command
+
+To observe the output we need to provide a flag -v (verbosity) to the command
+
+# ansible-playbook linux_commands.yml -v
+Using /etc/ansible/ansible.cfg as config file
+
+PLAY [execute linux commands] ******************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host 127.0.0.1 should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible 
+release will default to using the discovered platform python for this host. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information. This feature 
+will be removed in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [127.0.0.1]
+
+TASK [print all the files of /root/] ***********************************************************************************************************************************************************************
+changed: [127.0.0.1] => {"changed": true, "cmd": "ls -l /root/", "delta": "0:00:00.004228", "end": "2020-06-16 04:51:04.682586", "rc": 0, "start": "2020-06-16 04:51:04.678358", "stderr": "", "stderr_lines": [], "stdout": "total 30776\n-rw-r--r--  1 root root      129 Jun 16 04:46 cmd.yml\n-rw-r--r--  1 root root      452 Apr 27 21:01 configurations.json\ndrwxr-xr-x  2 root root     4096 Jan 30 20:09 container\ndrwxr-xr-x  6 root root     4096 May 13 14:53 drp\ndrwxr-xr-x 10 root root     4096 May  3 18:14 flask-rest\n-rw-r--r--  1 root root       96 Jun 16 04:40 hello.yml\n-rw-r--r--  1 root root      759 May 14 18:49 job.py\n-rw-r--r--  1 root root      300 Apr 14 17:47 openrc\ndrwxr-xr-x  7 root root     4096 May 14 18:52 rest-tasks\ndrwxr-xr-x  5 root root     4096 May 11 19:58 scheduler-tasks-db\ndrwxr-xr-x  3 root root     4096 Apr 12 12:04 scripts\ndrwxr-xr-x  3 root root     4096 Jan 19 18:04 snap\n-rw-r--r--  1 root root      129 Apr 10 19:42 tasks.py\n-rw-r--r--  1 root root      374 Apr 10 19:42 tasks.pyc\n-rw-r--r--  1 root root 14907580 May 22  2019 terraform_0.12.0_linux_amd64.zip\n-rw-r--r--  1 root root 16522081 Apr 12 10:11 terraform_0.12.24_linux_amd64.zip\n-rw-r--r--  1 root root      405 Apr 29 19:32 test.py\n-rw-r--r--  1 root root      137 Apr 30 15:29 test.rb\ndrwxr-xr-x  2 root root     4096 May  3 17:51 test_app\n-rw-r--r--  1 root root     1397 Apr 30 15:28 validate.rb\n-rw-r--r--  1 root root      223 Jan 19 18:35 wget-log", "stdout_lines": ["total 30776", "-rw-r--r--  1 root root      129 Jun 16 04:46 cmd.yml", "-rw-r--r--  1 root root      452 Apr 27 21:01 configurations.json", "drwxr-xr-x  2 root root     4096 Jan 30 20:09 container", "drwxr-xr-x  6 root root     4096 May 13 14:53 drp", "drwxr-xr-x 10 root root     4096 May  3 18:14 flask-rest", "-rw-r--r--  1 root root       96 Jun 16 04:40 hello.yml", "-rw-r--r--  1 root root      759 May 14 18:49 job.py", "-rw-r--r--  1 root root      300 Apr 14 17:47 openrc", "drwxr-xr-x  7 root root     4096 May 14 18:52 rest-tasks", "drwxr-xr-x  5 root root     4096 May 11 19:58 scheduler-tasks-db", "drwxr-xr-x  3 root root     4096 Apr 12 12:04 scripts", "drwxr-xr-x  3 root root     4096 Jan 19 18:04 snap", "-rw-r--r--  1 root root      129 Apr 10 19:42 tasks.py", "-rw-r--r--  1 root root      374 Apr 10 19:42 tasks.pyc", "-rw-r--r--  1 root root 14907580 May 22  2019 terraform_0.12.0_linux_amd64.zip", "-rw-r--r--  1 root root 16522081 Apr 12 10:11 terraform_0.12.24_linux_amd64.zip", "-rw-r--r--  1 root root      405 Apr 29 19:32 test.py", "-rw-r--r--  1 root root      137 Apr 30 15:29 test.rb", "drwxr-xr-x  2 root root     4096 May  3 17:51 test_app", "-rw-r--r--  1 root root     1397 Apr 30 15:28 validate.rb", "-rw-r--r--  1 root root      223 Jan 19 18:35 wget-log"]}
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+127.0.0.1                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Now you willbe able to see the output but not in a proper format. 
+
+Try incresing the verbosity by adding another v to the command like -vvvv. max 4v's can be added to find more output information.
+
