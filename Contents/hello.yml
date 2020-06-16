@@ -1,0 +1,8 @@
+---
+
+- name: execute ping check
+  hosts: localhost
+
+  tasks:
+  - name: ping localhost
+    ping:
