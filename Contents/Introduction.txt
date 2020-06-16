@@ -19,7 +19,8 @@ Ansible also comes with a UI tool called Ansible tower which helps in managing t
 #Ubuntu: 
 $ sudo apt-get update 
 $ sudo apt-get install software-properties-common 
-$ sudo apt-add-repository ppa:ansible/ansible $ sudo apt-get update 
+$ sudo apt-add-repository ppa:ansible/ansible 
+$ sudo apt-get update 
 $ sudo apt-get install ansible
 
 #Centos: 
@@ -28,4 +29,4 @@ sudo yum install -y ansible
 
 #MAC:
 easy_install pip
-pip instal -U ansible
+pip install -U ansible
