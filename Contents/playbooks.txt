@@ -1,0 +1,54 @@
+In comparison with ad-hoc commands, playbooks are used in complex scenarios, and they offer increased flexibility.
+
+Playbooks are the files where Ansible code is written. Playbooks are written in YAML format. 
+
+Each playbook is an aggregation of one or more plays in it.
+
+Playbook Structure
+
+---
+hosts: # group or all hosts present in the inventory
+become: # sudo command to run admin commands
+vars: # key-pair values/ variables used for the playbook 
+tasks: # ansible modules/instructions written for execution
+handlers: # any service start/stop/restart
+
+A playbook can contain any of the above things in it for execution. 
+
+Example ping playbook to localhost 
+
+  
+- name: execute ping check
+  hosts: localhost
+
+  tasks:
+  - name: ping localhost
+    ping:
+ 
+ The above playbook will be saved with .yml extension. 
+ 
+ Below is the command to execute a playbook written. 
+ 
+ # ansible-playbook hello.yml 
+
+PLAY [execute ping check] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host 127.0.0.1 should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible 
+release will default to using the discovered platform python for this host. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information. This feature 
+will be removed in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [127.0.0.1]
+
+TASK [ping localhost] **************************************************************************************************************************************************************************************
+ok: [127.0.0.1]
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+127.0.0.1                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+In the above command it takes /etc/ansible/hosts as the default inventory file for execution. As we have given local host it 
+executed for only localhost. We can provide any server group mentioned in the hosts file. 
+
+
+ 
+ $ ansible-playbook hello.yml
+ 
