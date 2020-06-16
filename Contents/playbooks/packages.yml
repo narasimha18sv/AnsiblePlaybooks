@@ -1,0 +1,27 @@
+---
+  
+- name: execute linux commands
+  hosts: localhost
+
+  tasks:
+  - name: install packages
+    package:
+      name: ntpdate
+      state: present
+
+  - name: install multiple packages
+    package:
+      name:
+        - ntpdate
+        - nmap
+      state: latest
+
+  - name: uninstall packages
+    package:
+      name: nmap
+      state: absent
+
+  - name: install packages using specific package manager
+    apt:
+      name: ntpdate
+      state: present
