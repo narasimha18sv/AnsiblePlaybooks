@@ -1,0 +1,15 @@
+---
+
+- name: execute linux commands
+  hosts: localhost
+
+  tasks:
+  - name: print all the files of /root/
+    shell: ls -l /root/
+    register: output
+
+  - debug:
+      var: output
+
+  - debug:
+      msg: output of command executed is {{ output }}
