@@ -10,12 +10,15 @@ Example 2: Nested YAML
 Narasimha:
   place: Hyderabad
   Address: KPHB
+Mallikarjun:
+  place: Bangalore
 
 Example 3: Multiple values 
 ---
 Fruits:
   - Apple
   - Bananna
+  - Mango
 Vegerables:
   - tomato
   - potato
