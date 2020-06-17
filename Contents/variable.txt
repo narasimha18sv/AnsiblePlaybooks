@@ -1,0 +1,75 @@
+A variable, just like in many programming languages, is essentially a key that represents a value.
+
+A variable name includes letters, numbers, underscores or a mix of either 2 or all of them. 
+However, bear in mind that a variable name must always begin with a letter and should not contain spaces.
+
+Valid variable name Examples:
+football 
+foot_ball
+football20 
+foot_ball20
+
+Invalid varibale name Examples:
+foot ball
+20 
+foot-ball
+
+Playbook variables are quite easy and straightforward. 
+To define a variable in a playbook, simply use the keyword vars before writing your variables with indentation.
+
+Example:
+
+- hosts: all
+  vars:
+    greeting: Hello world!
+    
+After defining the variable to access the same varibale in the tasks below is the syntax
+
+  - name: Ansible Basic Variable Example
+    debug:
+      msg: "{{ greeting }}"
+      
+You can have a list or an array of variables as shown:
+
+- hosts: all
+  vars:
+    continents:
+      - Africa
+      - Asia
+      - South America
+      - North America
+      - Europe
+  
+ The variable list can similarly be structured as shown:
+ 
+ - hosts: all
+  vars:
+    continents: [Africa, Asia, South America, North America, Europe]
+    
+ Now how to access each variable inside an array ?????
+ 
+ "with_items" is the module which helps in accessing each variable inside an array
+ 
+  - name: Ansible array variables example
+    debug: 
+      msg: "{{ item }}"
+    with_items:
+      - "{{ continents }}"
+      
+This can be used when we have requirement for installing multiple packages or running multiple commands at once
+
+Another type of Ansible variable is the dictionary variable.
+
+Dictionary variables are additionally supported in the playbook. 
+To define the dictionary variable, simply ident the key-value pair just below the dictionary variable name.
+
+vars:
+   salary:
+       person1: 10
+       person2: 20
+
+in tasks :
+
+  - name: Ansible Dictionary variable Example
+    debug:
+      msg: "{{ salary['person1'] }}"
