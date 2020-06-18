@@ -1,0 +1,18 @@
+---
+  
+- name: Conditional check based on OS
+  hosts: localhost
+
+  tasks:
+
+  - name: ubuntu install packages
+    package:
+         name: apache2
+         state: present
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: Centos install packages
+    package:
+         name: httpd
+         state: present
+    when: ansible_distribution == "CentOS"
