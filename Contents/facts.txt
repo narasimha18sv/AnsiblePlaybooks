@@ -1,0 +1,73 @@
+The list of Ansible predefined variables is referred to as Ansible facts and these are gathered when a playbook is executed.
+
+To get a list of all the Ansible variables, use the setup module in the Ansible ad-hoc command 
+as shown below and the output in JSON format 
+
+facts here will help to get the system information to update any file with proper values: like ip address in apache or httpd 
+application server, use value to check about the os information and install as per the os when multiple servers are there.
+
+# ansible -m setup localhost
+
+Example facts:
+
+ansible_architecture
+ansible_bios_date
+ansible_bios_version
+ansible_date_time
+ansible_machine
+ansible_memefree_mb
+ansible_os_family
+ansible_selinux
+
+Facts can be used examples
+
+Date – {{ ansible_date_time.date }} – 2020-06-19
+
+Time – {{ ansible_date_time.time }} – 06:08:46
+
+OS – {{ ansible_distribution }} – Ubuntu
+
+OS release – {{ ansible_distribution_release }} – xenial
+
+OS version – {{ ansible_distribution_version }} – 18.04
+
+Home directory – {{ ansible_env.HOME }}
+
+facts_example.yml playbook output:
+
+PLAY [Getting system facts] ********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host 127.0.0.1 should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible 
+release will default to using the discovered platform python for this host. See https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information. This feature 
+will be removed in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [127.0.0.1]
+
+TASK [debug] ***********************************************************************************************************************************************************************************************
+ok: [127.0.0.1] => {
+    "msg": "hostname is \"server\""
+}
+
+TASK [debug] ***********************************************************************************************************************************************************************************************
+ok: [127.0.0.1] => {
+    "msg": "os family is \"Debian\""
+}
+
+TASK [debug] ***********************************************************************************************************************************************************************************************
+ok: [127.0.0.1] => {
+    "msg": "mac address is \"08:00:27:af:e0:65\""
+}
+
+TASK [debug] ***********************************************************************************************************************************************************************************************
+ok: [127.0.0.1] => {
+    "msg": "ip address is \"10.0.2.15\""
+}
+
+TASK [debug] ***********************************************************************************************************************************************************************************************
+ok: [127.0.0.1] => {
+    "msg": "os family is \"Ubuntu\""
+}
+
+PLAY RECAP *************************************************************************************************************************************************************************************************
+127.0.0.1                  : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
