@@ -1,0 +1,23 @@
+---
+  
+- name: multiple variables list, dictinary and normal values
+  hosts: localhost
+  vars:
+    package_name: 'nmap'
+    packages:
+       - wget
+       - curl
+    house_holds:
+        fruit: 'apple'
+        vegetable: 'carrot'
+
+
+  tasks:
+  - name: take list variables
+    package:
+      name: "{{ item }}"
+      state: latest
+    with_items: "{{ packages }}"
+
+  - debug:
+      msg: dictionary or map value varibales is "{{ house_holds['fruit'] }}"
