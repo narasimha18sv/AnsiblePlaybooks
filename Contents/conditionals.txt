@@ -1,0 +1,41 @@
+Conditionals are one of the fundamental parts of any programming languages so as to control the flow of execution. 
+Ansible also provides a method for this using the ‘when’ clause. 
+The basic ‘when’ operation is very easy.
+
+When file exists:
+
+- name: when examples
+  hosts: localhost
+  tasks:
+  - stat:
+      path: /root/cmd.yml
+    register: result
+
+  - debug:
+      msg: "Ansible When File Exists Example."
+    when: result.stat.exists
+ 
+ - stat:
+      path: /tmp/
+   register: result
+  - debug:
+      msg: "Ansible when directory exists example multiple condiitons"
+    when: result.stat.exists == true and result.stat.isdir == true
+    
+"stat" module is used for checking file/directory existance.
+
+Multiple conditional example
+
+tasks:
+  - name: "shut down CentOS 6 and Debian 7 systems"
+    command: /sbin/shutdown -t now
+    when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6") or
+          (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "7")
+
+tasks:
+  - name: "shut down CentOS 6 systems"
+    command: /sbin/shutdown -t now
+    when:
+      - ansible_facts['distribution'] == "CentOS"
+      - ansible_facts['distribution_major_version'] == "6"
+
