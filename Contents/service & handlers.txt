@@ -1,0 +1,32 @@
+Ansible’s service module controls services on remote hosts and is useful for these common tasks like Start, 
+stop or restart a service on a remote host.
+
+Handlers helps us to make sure this can be done easily. 
+
+service example:
+
+- name: ensure apache2 service is started
+  service:
+    name: apache2
+    state: started   # other optoions here stopped/restarted 
+ 
+if you want to ensure that a service is started on system boot
+
+- name: ensure apache2 service is started and also starts on boot. Generally this willbe in redhat based OS.
+  service:
+    name: apache2
+    state: started
+    enabled: true
+If these services are needed to be run from root user then we need to "become: yes"
+
+Now how about handlers????
+
+Handlers are independent and idempotent. They may be called at any time after configuration was done in any order.
+if any task or generally service restarts need to be done whenever there is a configuration change then we use handlers there. 
+
+example: if we change the default ip address of the apache2 service to run in the conf then we need to use handler to 
+restart the service again. 
+
+handlers:
+
+
