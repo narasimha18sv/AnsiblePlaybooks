@@ -1,0 +1,106 @@
+Handling files and directories:
+
+"file" is the module used for working with files and directories
+
+create a file:
+
+- name: create a file
+  file:
+    path: /tmp/test
+    state: touch
+
+apart from creating a file we can also add permissions and ownership too.
+
+- name: Change file ownership, group and permissions
+  file:
+    path: /tmp/test
+    owner: user1
+    group: user1
+    mode: '0644'
+    
+Simillaryly we can create directories too and delete. 
+
+- name: Create a directory 
+  file:
+    path: /etc/some_directory
+    state: directory
+    mode: '0755'
+
+- name: Remove file (delete file)
+  file:
+    path: /etc/foo.txt
+    state: absent
+
+- name: Recursively remove directory
+  file:
+    path: /etc/foo
+    state: absent
+
+    
+how to add some contents to a file ??????
+
+1. copy the file with all the contents to a particular destination
+2. add a content based on a regular expression provided. 
+3. update file with user specific values from variables or system facts.
+
+copy a file : copy is the module which we use
+
+  - name: copy file to /tmp/
+    copy:
+      src: terraform_0.12.24_linux_amd64.zip
+      dest: /tmp/terraform_0.12.24_linux_amd64.zip
+      
+  this could be any file with contents.
+  
+  now if that is zip file and you want to unzip that one to extract data:
+  
+"unarchieve" is the module which is used to extract zip/tar files. remote_src this line is need if you are 
+copying this zip to a remote server. without remote_src module we wont able to extract the data
+
+- name: unarchieve netbackup agent
+  unarchive: 
+    src: /tmp/NetBackup_Agent.tar.gz
+    dest: /tmp/
+    remote_src: yes  
+
+if you want to add/edit any value in a file "lineinfile" is the module used for editing. 
+
+- name: change satellite server configuration hostname
+  lineinfile:
+    path: /etc/rhsm/rhsm.conf
+    regexp: '^hostname='
+    line: 'hostname={{ ansible_hostname }}' 
+    
+ in the above example it checks for the hostname line in rhsm.conf file  it will add statements which we gave in "line:"
+ this modules will be majorly used for configurations changes that are required but if they are very less changes rather
+ than a complete file update. 
+ 
+ To update a complete file with configurations we use "templates"
+ 
+ Few more examples
+ 
+ - name: Ensure the default Apache port is 8080
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: Listen 8080
+
+- name: Ensure we have our own comment added to /etc/services
+  lineinfile:
+    path: /etc/services
+    regexp: '^# port for http'
+    insertbefore: '^www.*80/tcp'
+    line: '# port for http by default'
+
+- name: Add a line to a file if the file does not exist, without passing regexp
+  lineinfile:
+    path: /tmp/testfile
+    line: 192.168.1.99 foo.lab.net foo
+    create: yes
+
+ 
+ 
+    
+ 
+ 
