@@ -34,6 +34,7 @@ Handlers are just like normal tasks in an Ansible playbook but they run only whe
 - hosts: localhost
   tasks:
     - name: Enable Symfony config template from Nginx available sites
+      shell: ## some commands
       notify: Restart Nginx
   handlers:
     - name: Restart Nginx
