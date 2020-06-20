@@ -1,0 +1,61 @@
+---
+  
+- name: services and handlers
+  hosts: localhost
+  vars:
+    packages:
+      - apache2
+      - nmap
+      - httpd
+
+  tasks:
+
+  - name: ubuntu install packages
+    package:
+         name: apache2
+         state: present
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: centos install packages
+    package:
+         name: httpd
+         state: present
+    when:
+      - ansible_distribution == 'CentOS'
+      - ansible_os_family == 'RedHat'
+
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+
+  - name: restart service
+    shell: date
+    notify: restart apache2
+
+  - name: copy file to /tmp/
+    copy:
+      src: terraform_0.12.24_linux_amd64.zip
+      dest: /tmp/terraform_0.12.24_linux_amd64.zip
+
+  - name: unzip
+    unarchive:
+      src: /tmp/terraform_0.12.24_linux_amd64.zip
+      dest: /tmp/
+      remote_src: yes
+
+  - name: Ensure the default Apache port is 8080
+    lineinfile:
+      path: /etc/apache2/apache2.conf
+      regexp: '^Listen '
+      insertafter: '^#Listen '
+      line: Listen {{ ansible_default_ipv4.address }}:8080
+    notify: restart apache2
+
+
+  handlers:
+
+  - name: restart apache2
+    service:
+      name: apache2
+      state: restarted
