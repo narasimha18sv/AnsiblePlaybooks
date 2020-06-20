@@ -1,0 +1,33 @@
+---
+  
+- name: services and handlers
+  hosts: localhost
+  vars:
+    packages:
+      - apache2
+      - nmap
+      - httpd
+
+  tasks:
+
+  - name: ubuntu install packages
+    package:
+         name: apache2
+         state: present
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+
+  - name: restart service
+    shell: date
+    notify: restart apache2
+
+  handlers:
+
+  - name: restart apache2
+    service:
+      name: apache2
+      state: restarted
