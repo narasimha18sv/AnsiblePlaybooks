@@ -49,7 +49,7 @@
       path: /etc/apache2/apache2.conf
       regexp: '^Listen '
       insertafter: '^#Listen '
-      line: Listen {{ ansible_default_ipv4.address }}:8080
+      line: Listen {{ ansible_enp0s8.ipv4.address }}:8080
     notify: restart apache2
 
 
