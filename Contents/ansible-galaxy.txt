@@ -1,0 +1,26 @@
+Ansible Galaxy refers to the Galaxy website, a free site for finding, downloading, and sharing community developed roles.
+
+url: https://galaxy.ansible.com/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW
+
+ansible-galaxy can be used for creating a new role or find an existing role and install it on the ansible controller.
+
+Search the Galaxy database by tags, platforms, author and multiple keywords. For example:
+
+$ ansible-galaxy search elasticsearch --author geerlingguy
+
+Use the ansible-galaxy command to download roles from the Galaxy website
+
+$ ansible-galaxy install namespace.role_name
+
+Useansible-galaxy command to create role directory structure
+
+$ ansible-galaxy init example_role
+
+Use list to show the name and version of each role installed in the roles_path.
+
+$ ansible-galaxy list
+
+Use remove to delete a role from roles_path:
+
+$ ansible-galaxy remove namespace.role_name
+
