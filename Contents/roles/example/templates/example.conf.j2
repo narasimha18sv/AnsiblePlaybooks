@@ -1,0 +1,12 @@
+ip: {{ ansible_enp0s8.ipv4.address }}
+inputs: {{ package_name }}
+
+{% for package in packages %}
+{% if package  == 'apache2' %}
+package name is apache2
+{% else %}
+package {{ loop.index }} is {{ package }}
+{% endif %}
+{% endfor %}
+
+

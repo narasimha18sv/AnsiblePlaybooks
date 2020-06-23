@@ -36,4 +36,7 @@
        path: /etc/hosts
        line: 192.168.1.99 foo.lab.net foo
        create: yes
-
+- name: use template files
+  template:
+      src: example.conf.j2
+      dest: /tmp/example.conf
