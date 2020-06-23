@@ -1,0 +1,7 @@
+---
+packages:
+  - apache2
+  - nmap
+  - httpd
+package_name: apache2
+

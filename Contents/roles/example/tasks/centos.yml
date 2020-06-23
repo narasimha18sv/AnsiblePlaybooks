@@ -1,0 +1,5 @@
+---
+- name: centos install packages
+  package:
+     name: httpd
+     state: present

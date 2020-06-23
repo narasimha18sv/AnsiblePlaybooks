@@ -1,0 +1,39 @@
+---
+- name: ubuntu install packages
+  package:
+         name: apache2
+         state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: import centos task
+  include_tasks: centos.yml 
+  when: ansible_distribution == 'CentOS'
+
+- name: start apache2
+  service:
+      name: apache2
+      state: started
+
+- name: restart service
+  shell: date
+  notify: restart apache2
+
+- name: copy file to /tmp/
+  copy:
+    src: terraform_0.12.24_linux_amd64.zip
+    dest: /tmp/terraform_0.12.24_linux_amd64.zip
+
+- name: Ensure the default Apache port is 8080
+  lineinfile:
+      path: /etc/apache2/apache2.conf
+      regexp: '^Listen '
+      insertafter: '^#Listen '
+      line: Listen {{ ansible_enp0s8.ipv4.address }}:8080
+  notify: restart apache2
+
+- name: Add a line to a file if the file does not exist, without passing regexp
+  lineinfile:
+       path: /etc/hosts
+       line: 192.168.1.99 foo.lab.net foo
+       create: yes
+
