@@ -1,0 +1,30 @@
+Ansible’s template module transfers templated files to remote hosts. It works similarly to the copy module, but with 2 major differences:
+
+    1. template looks for templates in ./templates/ when you supply a relative path for src (instead of ./files/ for copy)
+    2. You can use the jinja2 templating language in your files, which will be templated out separately for each remote host
+
+The template module is extremely useful for doing machine-specific configuration based on Ansible variables.
+
+example:
+
+- name: use template files
+  template:
+      src: example.conf.j2
+      dest: /tmp/example.conf
+      
+example.conf.j2 content:
+
+ip: {{ ansible_enp0s8.ipv4.address }}
+inputs: {{ package_name }}
+
+After playbook execution example.conf file will look like
+
+# cat /tmp/example.conf 
+ip: 192.168.56.102
+inputs: apache2
+
+      
+every template configuration file you want that needs to be extended with ".j2" which is jinja2 template style.
+
+jinja2 template style is nothing but how we do access the varibale in the tasks, will be simillarly accessed in the configuration files. 
+
