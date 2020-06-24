@@ -1,0 +1,60 @@
+Inventory refer to the all the servers on which we want to execute the ansible playbooks. 
+
+Default inventory file that would be taken by ansible will be /etc/ansible/hosts. 
+
+If we dont want to use that and want use your own file with servers use "-i" option with file path. 
+
+$ ansible-playbook -i inventory test.yml
+
+Grouping of servers:
+
+Inventory file can contain all the servers mentioned line by line. apart from that we can group multiple servers like
+
+example:
+
+[web]
+hostname1
+hostname2
+
+[database]
+db1
+db2
+
+While writing the playbook you need to mention the same group names mentioned in the inventory file. if the playbook needs to be exceuted on all the servers 'all'
+needs to be used 
+
+---
+- name: execute playbook
+  hosts: all #web/db1 if any specific group servers 
+  
+
+Apart from these if there are any specific variables to the server we can specify them in the inventory file. for example like the username and password 
+that can be used for executing the playbook on a server. 
+
+[web]
+hostname1 ansible_user=user1  ansible_host=10.16.10.13
+hostname2 
+
+above example tells if you want to particular values in for a server/host. 
+These variables are called host_vars
+
+if you want to provide ansible variables to all the serves in a group then you can mention as below
+
+[web:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file=/root/.ssh/id_rsa #if you have a different private keys you can use this to specify path. 
+http_port=443
+ntp_server=us.pool.ntp.org
+
+by specifying like above these variables will be applied to all the servers in that group in that inventory file. Even we can specify variables too apart from 
+the ansible conenction variables. These are called group_vars.
+
+group_vars and host_vars can be mentioned by creating group_vars file in the roles path. Generally roles path will be /etc/ansible.
+
+create a new folder group_vars and in that create a file with the group name. like above web.yaml is the group vars in that above example. 
+we will add all the variables mentioned will be added to the file. 
+
+If it is host specific variables then create host_vars foldeer in /etc/ansible path. create file with hostname along .yml extension. 
+add the required variables in that file. 
+
+
