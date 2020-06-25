@@ -1,0 +1,36 @@
+If you have a large playbook, it may become useful to be able to run only a specific part of it rather than running everything in the playbook. 
+Ansible supports a “tags:” attribute for this reason.
+
+tasks:
+- yum:
+    name:
+    - httpd
+    - memcached
+    state: present
+  tags:
+  - packages
+
+- template:
+    src: templates/src.j2
+    dest: /etc/foo.conf
+  tags:
+  - configuration
+
+if you wanted to just run the “configuration” and “packages” part of a very long playbook, you can use the --tags option on the command line:
+$ ansible-playbook example.yml --tags "packages"
+
+if you want to run a playbook without certain tagged tasks, you can use the --skip-tags command-line option:
+$ ansible-playbook example.yml --skip-tags "packages"
+
+There is a special always tag that will always run a task, unless specifically skipped (--skip-tags always)
+
+tasks:
+- debug:
+    msg: "Always runs"
+  tags:
+  - always
+
+- debug: msg="{{ showmevar }}"
+  tags:
+    - never
+ Another special tag is never, which will prevent a task from running unless a tag is specifically requested.
