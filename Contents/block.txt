@@ -1,0 +1,49 @@
+Blocks allow for logical grouping of tasks and in play error handling. if you want to have multiple tasks to work for single condition it will be clumsy
+to add when confition to each of the task. Here blocks will help in doing that easier way.
+
+tasks:
+   - name: Install, configure, and start Apache
+     block:
+       - name: install httpd and memcached
+         yum:
+           name:
+           - httpd
+           - memcached
+           state: present
+
+       - name: apply the foo config template
+         template:
+           src: src.j2
+           dest: /etc/foo.conf
+       - name: start service bar and enable it
+         service:
+           name: bar
+           state: started
+           enabled: True
+     when: ansible_distribution == 'CentOS'
+
+   - name: Install, configure, and start Apache
+     block:
+       - name: install httpd and memcached
+         yum:
+           name:
+           - apache2
+           - memcached
+           state: present
+     when: ansible_distribution == 'Ubuntu'
+
+
+  Sometimes even if there are few errors still we might need to execute the playbooks. at that time add "ignore_errors: yes" below the taskor when conition 
+  which will make sure it wont stop execution even that task is failed. 
+    - name: Install, configure, and start Apache
+     block:
+       - name: install httpd and memcached
+         yum:
+           name:
+           - apache2
+           - memcached
+           state: present
+     when: ansible_distribution == 'Ubuntu'
+     ignore_errors: yes
+  
+  
