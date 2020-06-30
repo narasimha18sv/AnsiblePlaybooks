@@ -1,0 +1,19 @@
+Ansible tower is the web ui part that can give power to the users/administrators to execute playbooks/roles on the servers. 
+
+tower installation:
+
+1. download tower stup bundle from the below link.
+  https://releases.ansible.com/ansible-tower/setup-bundle/?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW
+
+2. If doing on centos install libselinux-python package 
+    yum install -y libselinux-python
+    
+3. untar the ansible setup tar file downloaded
+    tar xvf <ansible tat file >
+    
+4. Move to ansible directory of the untar 
+5. Updated the host ip, passwords in the inventory file for tower, postgres.
+6. execute setup.sh file
+  ./setup.sh
+
+acess tower from the browser with the ip you have updated in the inventory file.
