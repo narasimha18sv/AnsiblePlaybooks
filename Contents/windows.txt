@@ -1,0 +1,15 @@
+Linux servers we use SSH keys or password to execute the playbooks but how about windows servers. 
+
+Windows servers use "winrm" module to execute playbooks. But the tasks/modules wont be same for linux and windows. 
+
+For windows each module is different like copy, choclaty or other operations. 
+
+How to connect using winrm ????
+
+To connect to the windows server we definitely need password. 
+Check the group_vars/windows.yml file for the additional parameters needed to connect windows serves. 
+
+Once we add them we would be able to connect to the windows servers. 
+
+But winrm runs on http/https with portd 5985/5986. So if you are ina secured enviornment/cloud servers you need to make sure these ports are open to connect
+and execute ansible playbooks. 
