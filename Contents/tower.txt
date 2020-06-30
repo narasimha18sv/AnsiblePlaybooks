@@ -13,6 +13,8 @@ tower installation:
     
 4. Move to ansible directory of the untar 
 5. Updated the host ip, passwords in the inventory file for tower, postgres.
+ tower inventory example are here : https://docs.ansible.com/ansible-tower/latest/html/quickinstall/install_script.html
+ 
 6. execute setup.sh file
   ./setup.sh
 
