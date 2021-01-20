@@ -5,13 +5,30 @@ Example 1:
 Name: Narasimha
 Address: Hyderabad
 
+key: value
+
+JSON: {name: narasimha, address: hyderabad}
+
 Example 2: Nested YAML
 ---
 Narasimha:
   place: Hyderabad
   Address: KPHB
+  phone: 
+    no1: 88888
+    no2: 99999
 Mallikarjun:
   place: Bangalore
+  phone:
+    - 88888
+    - 99999
+mysql:
+   port: 3306
+   user: root
+   password: asaa
+
+JSON: {narasimha: {place: hyderabad, address: hyderabad, phone:{no1: 999, no2:8888}}}
+ {narasimha: {place: hyderabad, address: hyderabad, phone:[9999, 8888]}}
 
 Example 3: Multiple values 
 ---
@@ -22,3 +39,8 @@ Fruits:
 Vegerables:
   - tomato
   - potato
+packages:
+  - java
+  - mysql
+  - tomcat
+  
