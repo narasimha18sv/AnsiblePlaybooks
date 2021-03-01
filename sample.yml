@@ -1,0 +1,3 @@
+---
+- name: ping localhost
+  shell: echo "hello world"
