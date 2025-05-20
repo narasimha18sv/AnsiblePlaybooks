@@ -12,10 +12,10 @@ jobs:
       - name: Checkout pull request code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+      # - name: Set up Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.x'
 
       - name: Install Ansible and Ansible Lint
         run: |
