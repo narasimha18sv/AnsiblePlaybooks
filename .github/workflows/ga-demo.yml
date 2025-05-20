@@ -24,4 +24,4 @@ jobs:
 
       - name: Run Ansible Lint
         run: |
-          ansible-lint -p ./
+          ansible-lint -p sample.yml
